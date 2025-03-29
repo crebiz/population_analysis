@@ -3,6 +3,7 @@ import requests
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
+from config import API_KEY, RENTAL_HOUSING_URL
 
 # 한글 폰트 설정
 plt.rcParams['font.family'] = 'Malgun Gothic'
@@ -12,9 +13,6 @@ def fetch_rental_housing_data():
     """
     KOSIS API를 통해 민간임대주택 재고현황 데이터를 조회합니다.
     """
-    API_KEY = 'NDcxYmM3MzZiNDE3M2FjNjU1YmI4M2VhNDJjMWEyMGY='
-    BASE_URL = 'https://kosis.kr/openapi/Param/statisticsParameterData.do'
-    
     params = {
         'method': 'getList',
         'apiKey': API_KEY,
@@ -31,15 +29,14 @@ def fetch_rental_housing_data():
         'jsonVD': 'Y',
         'prdSe': 'Y',
         'newEstPrdCnt': '3',
-        # 'outputFields': 'ORG_ID+TBL_ID+TBL_NM+OBJ_ID+OBJ_NM+OBJ_NM_ENG+NM+NM_ENG+ITM_ID+ITM_NM+ITM_NM_ENG+UNIT_NM+UNIT_NM_ENG+PRD_SE+PRD_DE+LST_CHN_DE',
         'orgId': '116',
         'tblId': 'DT_MLTM_6828'
     }
-    # {'C1_OBJ_NM': '구분', 'C2_NM': '단기민간임대주택 건설', 'DT': '618', 'C2': '13102134365B.0001', 'C1': '13102134365A.0001', 'PRD_SE': 'A', 'UNIT_NM_ENG': 'Apartment Unit', 'ITM_ID': '13103134365T1', 'TBL_ID': 'DT_MLTM_6828', 'ITM_NM': '아파트', 'TBL_NM': '민간임대주택 재고현황', 'PRD_DE': '2021', 'LST_CHN_DE': '2025-01-23', 'C1_NM': '서울특별시', 'UNIT_NM': '호', 'ORG_ID': '116', 'C2_OBJ_NM': '레벨01'}
+
     try:
         info_placeholder = st.empty()
         info_placeholder.info("민간임대주택 재고현황 데이터 조회 중...")
-        response = requests.get(BASE_URL, params=params)
+        response = requests.get(RENTAL_HOUSING_URL, params=params)
         
         if response.status_code == 200:
             data = response.json()

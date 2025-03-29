@@ -6,6 +6,7 @@ import seaborn as sns
 import streamlit as st
 import matplotlib.font_manager as fm
 import json
+from config import API_KEY, POPULATION_URL
 
 # 한글 폰트 설정
 plt.rcParams['font.family'] = 'Malgun Gothic'  # 윈도우의 기본 한글 폰트
@@ -15,9 +16,6 @@ def fetch_population_data():
     """
     통계청 KOSIS API를 통해 행정구역(시군구)별 주민등록세대수를 가져옵니다.
     """
-    API_KEY = 'NDcxYmM3MzZiNDE3M2FjNjU1YmI4M2VhNDJjMWEyMGY='
-    BASE_URL = 'https://kosis.kr/openapi/Param/statisticsParameterData.do'
-# &itmId=T1+&objL1=ALL&objL2=&objL3=&objL4=&objL5=&objL6=&objL7=&objL8=&format=json&jsonVD=Y&prdSe=M&newEstPrdCnt=3&orgId=101&tblId=DT_1B040B3
     params = {
         'method': 'getList',
         'apiKey': API_KEY,
@@ -40,7 +38,7 @@ def fetch_population_data():
     
     try:
         st.info("KOSIS API 호출 중...")
-        response = requests.get(BASE_URL, params=params)
+        response = requests.get(POPULATION_URL, params=params)
         
         # API 응답 로깅
         st.write("요청 URL:", response.url)

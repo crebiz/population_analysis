@@ -2,14 +2,12 @@ import requests
 import pandas as pd
 import streamlit as st
 import json
+from config import API_KEY, STATISTICS_LIST_URL
 
 def fetch_statistics_list():
     """
     KOSIS API를 통해 통계목록을 조회합니다.
     """
-    API_KEY = 'NDcxYmM3MzZiNDE3M2FjNjU1YmI4M2VhNDJjMWEyMGY='  # API 키는 실제 발급받은 키로 변경해야 합니다
-    BASE_URL = 'https://kosis.kr/openapi/statisticsList.do'
-    
     params = {
         'method': 'getList',
         'apiKey': API_KEY,
@@ -22,7 +20,7 @@ def fetch_statistics_list():
     try:
         info_placeholder = st.empty()
         info_placeholder.info("KOSIS 통계목록 조회 중...")
-        response = requests.get(BASE_URL, params=params)
+        response = requests.get(STATISTICS_LIST_URL, params=params)
         
         # API 응답 상태 확인
         st.write("응답 상태 코드:", response.status_code)
