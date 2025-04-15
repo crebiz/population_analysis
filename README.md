@@ -58,5 +58,6 @@ streamlit run population_analyzer.py
 이 프로젝트는 MIT 라이선스 하에 배포됩니다.
 
 ## Windsurf
-- 이 프로젝트는 Windsurf AI를 사용하여 생성되었습니다.
+- 이 프로젝트는 Windsurf AI 툴을 사용하여 생성하였습니다.
 - 이 프로젝트는 Claude 3.5와 Claude 3.7를 사용하여 코딩하였습니다.
+- 생성된 코드에서 수정이 필요한 부분에 직접 코딩하였습니다.
